@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.406/styles/kendo.default-v2.min.css" />
+        <script src="https://kendo.cdn.telerik.com/2017.2.504/js/messages/kendo.messages.es-ES.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <style>
+            body {
+                font-family: Arial;
+            }
+    
+            /* Style the tab */
+    
+            .tab {
+                overflow: hidden;
+                border: 1px solid #ccc;
+                background-color: #0072bf;
+                border-radius: 0px 0px 0px 0px;
+                color: white;
+            }
+    
+            .tab1 {
+                overflow: hidden;
+                border: 0px solid #ccc;
+                background-color: #0072bf;
+                border-radius: 0px 0px 0px 0px;
+                padding: 20px;
+                text-transform: uppercase;
+                font-weight: bold;
+                color: white;
+            }
+    
+            .div2 {
+                width: auto;
+                height: 40px;
+                overflow: hidden;
+                border: 0px solid #ccc;
+                border-radius: 0px 0px 0px 0px;
+                color: white;
+            }
+    
+            /* Style the buttons inside the tab */
+    
+            .tab div {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+    
+    
+            /* Change background color of buttons on hover */
+    
+            .tab div:hover {
+                background-color: #ddd;
+            }
+    
+            /* Create an active/current tablink class */
+    
+            .tab div.active {
+                background-color: #7a7a7a;
+            }
+    
+            /* Style the tab content */
+    
+            .tabcontent {
+                padding: 0px 0px 0px 0px;
+                border: 1px solid #ccc;
+                border-top: none;
+                border-radius: 0px 0px 0px 0px;
+                height: auto;
+            }
+    
+            #Tab2 {
+                display: none;
+            }
+    
+            input {
+                margin: 12px;
+                padding: 10px;
+            }
+    
+            .mainButtons {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 0px;
+            }
+    
+            .tabOne {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .tabtwo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+    
+            .totalInput {
+                width: 80px;
+                padding: 0px;
+            }
+    
+            /* HEADER */
+    
+    
+            .titulo {
+                padding-bottom: 8px;
+            }
+    
+            .btn-cont {
+                padding-top: 8px;
+                text-align: end;
+            }
+    
+            /* end-header */
+    
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+    
+            #Pendientes {
+                display: block;
+            }
+    
+            #Devueltos {
+                display: none;
+            }
+    
+            .conteinColumns {
+                display: flex;
+                padding: 10px 0 10px 0;
+                justify-content: space-between;
+                width: 80%;
+                margin: auto;
+            }
+    
+            #uno {
+                margin: 30px 90px 30px 200px;
+                width: 250px;
+                padding-right: 30%;
+            }
+    
+            .btn-cont {
+                padding-top: 0px;
+                text-align: center;
+                align-items: center
+            }
+    
+            /* New style */
+            #AllContent>div.main-tittle.ng-scope>h1 {
+                color: #ffffff !important;
+            }
+    
+            .main-tittle {
+                background-color: lightslategrey;
+                text-align: center;
+                /* color: #fff; */
+                padding: 10px 0 10px 0;
+            }
+    
+    
+            .divduo {
+                width: 45%;
+    
+            }
+    
+            .dropDown {
+                width: 100%;
+                margin-top: 7px;
+                margin-bottom: 7px;
+            }
+    
+            .btn {
+                padding: px 15px;
+                font-size: 20px;
+                width: 100%;
+                text-align: left;
+                background-color: grey;
+            }
+    
+            .addBtn {
+                padding: px 15px;
+                font-size: 12px;
+            }
+    
+            .separator {
+                margin: 0px;
+                border-top: 1px solid #cecece;
+            }
+    
+            .add-btn-container {
+                text-align: end;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id="Pendientes">
+            <div class="mainContent">
+                <div class="conteinColumns">
+                    <div class="divduo">
+                               
+                        <div><label class="labelInput">Documento paciente:<span class="requiredClass"></span></label><br>
+                        <div id="ddlDocumentoP" class="dropDown"></div></div>
+    
+                        <div><label class="labelInput"> Ingreso:<span class="requiredClass"></span></label><br>
+                            <div id="ddlIngreso" class="dropDown"></div></div>
+        
+                    </div>
+    
+                    <div class="divduo">
+    
+                         
+                        <div><label class="labelInput"> Número de fórmula:<span class="requiredClass"></span></label><br>
+                            <div id="ddlNumFormula" class="dropDown"></div></div>
+        
+    
+                                       <br> <br>
+                        <div class="add-btn-container">
+                            <button id="btn_Buscar" class="addBtn">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab">
+            <div class="tablinks active" onclick="openTab(event, 'Pendientes')">Pendientes por devolver</div>
+            <div class="tablinks" onclick="openTab(event, 'Devueltos')">Devueltos</div>
+        </div>
+        <!--Formulario accordion tabUno-->
+        <div id="Pendientes" class="tabcontent">
+            <div id="Results">
+                <div class="cards-container">
+                    <div class="k-card-header">
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="#" data-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                            Acetaminofén
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                    data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="conteinColumns">
+    
+                                            <div class="divduo">
+    
+                                                <label class="labelInput"> Código producto:<span
+                                                        id="Codigo"></span></label><br>
+                                                <input type="text" class="input-basic input-expand"
+                                                    placeholder="Código producto" id="CodigoP">
+    
+                                                <label class="labelInput">Lote:<span id="lote"></span></label><br>
+                                                <input type="text" class="input-basic input-expand" placeholder="Lote"
+                                                    id="Lote">
+    
+                                                <label class="labelInput">Recibidos:<span
+                                                        id="Recibidos"></span></label><br>
+                                                <input type="number" class="input-basic input-expand" placeholder="Recibidos"
+                                                    id="recibidos">
+    
+                                                <label class="labelInput">Aplicados<span
+                                                        id="FaltaR"></span></label><br>
+                                                <input type="text" class="input-basic input-expand"
+                                                    placeholder="Falta devolver" id="txtFaltaR">
+                                            </div>
+                                            <div class="divduo">
+    
+                                                <label class="labelInput">Devoluciones:<span id="Producto"></span></label><br>
+                                                <input type="text" class="input-basic input-expand" placeholder="Producto"
+                                                    id="txtProducto">
+    
+                                                <label class="labelInput">Faltan por devolver:<span
+                                                        id="Fecha"></span></label><br>
+                                                <input type="date" id="FechaV" class="dropDown">
+    
+                                                <label class="labelInput">Devolver:<span id="Recibidos"></span></label><br>
+                                                <input type="text" class="input-basic input-expand" placeholder="Recibidos"
+                                                    id="txtRecibidos">
+    
+                                               
+                                                <div class="add-btn-container">
+                                                    <button id="btn_devolver" class="addBtn">Devolver
+                                                        medicamentos</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="" data-target="#collapseTwo"
+                                            aria-expanded="true" aria-controls="collapseTwo">
+                                            Amoxicilina
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                    data-parent="#accordion">
+                                    <div class="card-body">
+    
+                                        <div class="conteinColumns">
+                                            <div class="divduo">
+    
+                                                <label class="labelInput"> Código producto:<span
+                                                        id="Codigo"></span></label><br>
+                                                <input type="text" class="input-basic input-expand"
+                                                    placeholder="Código producto" id="CodigoP">
+    
+                                                <label class="labelInput">Lote:<span id="lote"></span></label><br>
+                                                <input type="text" class="input-basic input-expand" placeholder="Lote"
+                                                    id="Lote">
+    
+                                                <label class="labelInput">Recibidos:<span
+                                                        id="Recibidos"></span></label><br>
+                                                <input type="number" class="input-basic input-expand" placeholder="Recibidos"
+                                                    id="recibidos">
+    
+                                                <label class="labelInput">Aplicados<span
+                                                        id="FaltaR"></span></label><br>
+                                                <input type="text" class="input-basic input-expand"
+                                                    placeholder="Falta devolver" id="txtFaltaR">
+                                            </div>
+                                            <div class="divduo">
+    
+                                                <label class="labelInput">Devoluciones:<span id="Producto"></span></label><br>
+                                                <input type="text" class="input-basic input-expand" placeholder="Producto"
+                                                    id="txtProducto">
+    
+                                                <label class="labelInput">Faltan por devolver:<span
+                                                        id="Fecha"></span></label><br>
+                                                <input type="date" id="FechaV" class="dropDown">
+    
+                                                <label class="labelInput">Devolver:<span id="Recibidos"></span></label><br>
+                                                <input type="text" class="input-basic input-expand" placeholder="Recibidos"
+                                                    id="txtRecibidos">
+    
+                                               
+                                                <div class="add-btn-container">
+                                                    <button id="btn_devolver" class="addBtn">Devolver
+                                                        medicamentos</button>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    
+    
+        <!--Formulario accordion tabDos-->
+        <div id="Devueltos" class="tabcontent">
+            <div id="Results1">
+                <div class="cards-container">
+                    <div class="k-card-header">
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingTres">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTres"
+                                            aria-expanded="true" aria-controls="collapseTres">
+                                            Acetaminofén
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTres" class="collapse" aria-labelledby="headingTres"
+                                    data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="conteinColumns">
+                                            <div class="divduo">
+    
+                                                <h5>Formula:<span id="CodEAN"> 067:</span></h5>
+    
+                                                <h5>Código producto:<span id="CodEAN"> 809</span></h5>
+    
+                                                <h5>Lote:<span id="CodEAN">5</span></h5>
+    
+                                                <h5>Recibido:<span id="CodEAN">No</span></h5>
+    
+                                            </div>
+                                            <div class="divduo">
+    
+                                                <h5>Remisión:<span id="CodEAN">44</span></h5>
+    
+                                                <h5>Producto:<span id="CodEAN">Meloxican</span></h5>
+    
+                                                <h5>Fecha vencimiento:<span id="CodEAN">04/8/2025</span></h5>
+    
+                                                <h5>Usuario:<span id="CodEAN">Rogelio Mango</span></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="card">
+                                <div class="card-header" id="headingFour">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour"
+                                            aria-expanded="true" aria-controls="collapseFour">
+                                            Amoxicilina
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                                    data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="conteinColumns">
+                                            <div class="divduo">
+                                                <h5>Formula:<span id="CodEAN"> 467:</span></h5>
+    
+                                                <h5>Código producto:<span id="CodEAN">21</span></h5>
+    
+                                                <h5>Lote:<span id="CodEAN">34</span></h5>
+                                                <h5>Recibido:<span id="CodEAN">Si</span></h5>
+    
+                                            </div>
+                                            <div class="divduo">
+    
+                                                <h5>Remisión:<span id="CodEAN">55</span></h5>
+    
+                                                <h5>Producto:<span id="CodEAN">Amoxicilina</span></h5>
+    
+                                                <h5>Fecha vencimiento:<span id="CodEAN">23/11/2022</span></h5>
+                                                <h5>Usuario:<span id="CodEAN">Luis Moncada</span></h5>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
+        <script>
+            //Controlador de tabs
+            function openTab(evt, tabName) {
+                debugger;
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+    
+            $(".btn-link").click(function(){
+                 $("#collapseOne").toggle();
+		         
+            });
+        
+            $(".btn-link").click(function(){
+               
+		          $("#collapseTwo").toggle();
+            });
+    
+    
+    
+        </script>
+    </body>
+    
+    
+</html>
